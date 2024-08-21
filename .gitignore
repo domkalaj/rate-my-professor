@@ -34,3 +34,25 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# logs
+*.log
+
+# runtime data
+pids
+*.pid
+*.seed
+
+# temporary files
+*.tmp
+*.swp
+*.swo
+
+# IDEs and Editors
+/.idea/
+/.vscode/
+
+# Operating System Files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
