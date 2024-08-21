@@ -1,0 +1,124 @@
+{
+  "reviews": [
+    {
+      "professor": "Dr. Emily Wilkins",
+      "subject": "Organic Chemistry",
+      "stars": 4,
+      "review": "Dr. Wilkins is an excellent professor who truly cares about her students' learning. Her lectures are engaging and she is always available for extra help."
+    },
+    {
+      "professor": "Professor James Nguyen",
+      "subject": "Calculus I",
+      "stars": 3,
+      "review": "Professor Nguyen is knowledgeable, but his teaching style can be dry at times. The workload is heavy, but the material is manageable with dedication."
+    },
+    {
+      "professor": "Dr. Sarah Goldstein",
+      "subject": "Introduction to Psychology",
+      "stars": 5,
+      "review": "Dr. Goldstein is an incredibly passionate and engaging professor. She makes the subject matter come alive and genuinely cares about her students' success."
+    },
+    {
+      "professor": "Professor Aisha Rahman",
+      "subject": "Data Structures and Algorithms",
+      "stars": 4,
+      "review": "Professor Rahman is knowledgeable and provides clear explanations. The course is challenging, but she is always willing to provide extra support to ensure student understanding."
+    },
+    {
+      "professor": "Dr. Michael Gonzalez",
+      "subject": "Introduction to Sociology",
+      "stars": 3,
+      "review": "Dr. Gonzalez's lectures can be dry at times, but the course material is interesting. He is fair in his grading and provides helpful feedback on assignments."
+    },
+    {
+      "professor": "Professor Olivia Diaz",
+      "subject": "Principles of Management",
+      "stars": 4,
+      "review": "Professor Diaz is an excellent communicator and makes the course material engaging. She provides valuable real-world examples and encourages active participation."
+    },
+    {
+      "professor": "Dr. Liam Cho",
+      "subject": "Biochemistry",
+      "stars": 4,
+      "review": "Dr. Cho is a knowledgeable and approachable professor. His lectures are well-organized, and he is always willing to clarify concepts during office hours."
+    },
+    {
+      "professor": "Professor Ava Patel",
+      "subject": "Introduction to Marketing",
+      "stars": 5,
+      "review": "Professor Patel is an exceptional educator. Her lectures are insightful, and she provides valuable feedback on assignments. The course is challenging but highly rewarding."
+    },
+    {
+      "professor": "Dr. Ethan Reyes",
+      "subject": "Physics I",
+      "stars": 3,
+      "review": "Dr. Reyes is knowledgeable, but his teaching style can be difficult to follow at times. The course material is challenging, and he expects a lot from his students."
+    },
+    {
+      "professor": "Professor Isabella Moreno",
+      "subject": "Human Resource Management",
+      "stars": 4,
+      "review": "Professor Moreno is engaging and passionate about the subject matter. She provides relevant real-world examples and encourages class discussions."
+    },
+    {
+      "professor": "Dr. Noah Gutierrez",
+      "subject": "Introduction to Computer Science",
+      "stars": 4,
+      "review": "Dr. Gutierrez is a knowledgeable and patient professor. He breaks down complex concepts well and is always available to provide extra assistance."
+    },
+    {
+      "professor": "Professor Olivia Flores",
+      "subject": "Fundamentals of Accounting",
+      "stars": 3,
+      "review": "Professor Flores is knowledgeable, but her lectures can be dry at times. The course workload is heavy, but she provides helpful resources to support student learning."
+    },
+    {
+      "professor": "Dr. Ethan Ramirez",
+      "subject": "Developmental Psychology",
+      "stars": 5,
+      "review": "Dr. Ramirez is an exceptional professor. His lectures are engaging, and he provides valuable insights that deepen understanding of the course material."
+    },
+    {
+      "professor": "Professor Isabella Sanchez",
+      "subject": "Introduction to Business",
+      "stars": 4,
+      "review": "Professor Sanchez is knowledgeable and passionate about the subject matter. Her teaching style is interactive, and she encourages critical thinking."
+    },
+    {
+      "professor": "Dr. Noah Flores",
+      "subject": "Organic Chemistry II",
+      "stars": 3,
+      "review": "Dr. Flores is knowledgeable, but his lectures can be fast-paced and difficult to follow. The course material is challenging, and he expects a high level of dedication from his students."
+    },
+    {
+      "professor": "Professor Ava Dominguez",
+      "subject": "Introduction to Microeconomics",
+      "stars": 4,
+      "review": "Professor Dominguez is an engaging and insightful instructor. She provides clear explanations and real-world examples that enhance understanding of the course material."
+    },
+    {
+      "professor": "Dr. Ethan Morales",
+      "subject": "General Biology I",
+      "stars": 4,
+      "review": "Dr. Morales is a knowledgeable and approachable professor. His lectures are well-organized, and he is always willing to clarify concepts during office hours."
+    },
+    {
+      "professor": "Professor Isabella Garcia",
+      "subject": "Introduction to Literature",
+      "stars": 5,
+      "review": "Professor Garcia is an exceptional educator. Her passion for the subject matter is contagious, and she creates a dynamic and engaging classroom environment."
+    },
+    {
+      "professor": "Dr. Noah Sanchez",
+      "subject": "Principles of Finance",
+      "stars": 3,
+      "review": "Dr. Sanchez is knowledgeable, but his teaching style can be dry at times. The course material is challenging, and he expects a high level of understanding from his students."
+    },
+    {
+      "professor": "Professor Olivia Ramirez",
+      "subject": "Introduction to Sociology",
+      "stars": 4,
+      "review": "Professor Ramirez is an engaging and insightful instructor. Her lectures are well-organized, and she provides helpful resources to support student learning."
+    }
+  ]
+}
