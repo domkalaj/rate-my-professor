@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
-import { PineconeClient } from "@pinecone-database/pinecone";
+import { Pinecone } from "@pinecone-database/pinecone";
 import OpenAI from "openai";
+console.log("hi")
 
 // Define the system prompt using backticks for multi-line strings
 const systemPrompt = `
@@ -29,31 +30,42 @@ When responding:
 
 Remember, your goal is to help students provide meaningful feedback that can improve the overall quality of education while maintaining a respectful and professional environment.
 `;
-
+const openAIKey = process.env.OPENAI_API_KEY || local;
 export async function POST(req) {
   const data = await req.json();
-  const pc = new PineconeClient();  // Use PineconeClient, not Pinecone
-  const index = pc.Index("rag").namespace("ns1");
-  const openai = new OpenAI();
-  const text = data[data.length - 1].content; // Fixed: Added .content
 
-  const embedding = await openai.embeddings.create({
-    model: "text-embedding-3-small",
+  // Initialize PineconeClient properly
+  const pc = new Pinecone({
+    apiKey: process.env.PINECONE_API_KEY,
+  });
+  const index = pc.Index("rag").namespace("ns1");
+  // Initialize OpenAI client
+  console.log(openAIKey)
+  const openai = new OpenAI({apiKey:openAIKey});
+
+  const text = data[data.length - 1].content;
+
+  // Create embedding
+  const embeddingResponse = await openai.embeddings.create({
+    model: 'text-embedding-3-small', // Make sure this is the correct model
     input: text
   });
 
+  const embedding = embeddingResponse.data[0].embedding;
+
+  // Query Pinecone index
   const results = await index.query({
     topK: 3,
     includeValues: true,
     includeMetadata: true,
-    vector: embedding.data[0].embedding
+    vector: embedding
   });
 
   let resultString = "\n\nreturn results from db (done automatically): ";
   results.matches.forEach(match => {
     resultString += `
     Professor: ${match.id}
-    Review: ${match.metadata["stars"]}
+    Review: ${match.metadata["review"]}
     Subject: ${match.metadata["subject"]}
     Stars: ${match.metadata["stars"]}
     \n\n
@@ -64,16 +76,18 @@ export async function POST(req) {
   const lastMessageContent = lastMessage.content + resultString;
   const lastDataWithoutLastMessage = data.slice(0, data.length - 1);
 
+  // Generate completion using OpenAI
   const completion = await openai.chat.completions.create({
-    messages: [ // Fixed: Use correct property name and format
+    model: "gpt-4", // Ensure this model name is correct
+    messages: [
       { role: "system", content: systemPrompt },
       ...lastDataWithoutLastMessage,
       { role: "user", content: lastMessageContent }
     ],
-    model: "gpt-4o-mini",
     stream: true
   });
 
+  // Stream the response
   const stream = new ReadableStream({
     async start(controller) {
       const encoder = new TextEncoder();

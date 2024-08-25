@@ -13,7 +13,7 @@ export default function LandingPage() {
   };
 
   const goToChat = () => {
-    router.push('/chat'); // Navigate to the chat page
+    router.push('/talk'); // Navigate to the chat page
   };
 
   return (
