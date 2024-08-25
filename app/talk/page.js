@@ -19,6 +19,7 @@ export default function ChatPage() {
 
   const sendMessage = async () => {
     if (message.trim() === "") return; // Prevent sending empty messages
+    console.log(message)
 
     setMessages((prevMessages) => [
       ...prevMessages,
@@ -36,39 +37,34 @@ export default function ChatPage() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify([...messages, { role: 'user', content: message }]),
-      });
-
-      const reader = response.body.getReader();
-      const decoder = new TextDecoder();
-      let result = '';
-
-      const readStream = async () => {
-        const { done, value } = await reader.read();
-        if (done) {
-          setIsTyping(false); // Hide typing indicator
-          return;
-        }
-        const text = decoder.decode(value || new Uint8Array(), { stream: true });
-        result += text;
-
-        setMessages((prevMessages) => {
-          const lastMessage = prevMessages[prevMessages.length - 1];
-          const otherMessages = prevMessages.slice(0, prevMessages.length - 1);
-          return [
-            ...otherMessages,
-            { ...lastMessage, content: lastMessage.content + text }
-          ];
-        });
-
-        await readStream();
-      };
-
-      await readStream();
+      }).then(async (res) => {
+        const reader = res.body.getReader()
+        const decoder = new TextDecoder()
+        let result = ''
+    
+        return reader.read().then(function processText({done, value}) {
+          if (done) {
+            setIsTyping(false)
+            return result
+          }
+          const text = decoder.decode(value || new Uint8Array(), {stream: true})
+          setMessages((messages) => {
+            let lastMessage = messages[messages.length - 1]
+            let otherMessages = messages.slice(0, messages.length - 1)
+            return [
+              ...otherMessages,
+              {...lastMessage, content: lastMessage.content + text},
+            ]
+          })
+          return reader.read()
+        })
+      })
     } catch (error) {
       setIsTyping(false); // Hide typing indicator in case of error
       console.error('Error fetching chat response:', error);
     }
   };
+
 
   return (
     <Box
@@ -166,7 +162,6 @@ export default function ChatPage() {
                 maxWidth="70%"
                 fontFamily={'Open Sans'}
                 fontSize={'18px'}
-                wordBreak="break-word"
                 ml={msg.role === 'assistant' ? 2 : 0} // Add margin between avatar and message
               >
                 {msg.content}
@@ -187,7 +182,6 @@ export default function ChatPage() {
                 maxWidth="50%" // Reduce maxWidth to make the box narrower
                 fontFamily={'Open Sans'}
                 fontSize={'14px'} // Reduce font size for the "Typing..." text
-                wordBreak="break-word"
                 ml={8} // Add margin to align with where the avatar would be
               >
                 Typing...
