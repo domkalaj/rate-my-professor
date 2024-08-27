@@ -1,0 +1,154 @@
+'use client';
+import { Box, Typography, Button, Switch, FormControlLabel, Stack } from '@mui/material';
+import { useRouter } from 'next/navigation';
+import React, { useState } from 'react';
+import Image from 'next/image';
+
+export default function LandingPage() {
+  const router = useRouter();
+  const [darkMode, setDarkMode] = useState(true); // State to manage dark mode
+
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+  };
+
+  const goToChat = () => {
+    router.push('/talk'); // Navigate to the chat page
+  };
+
+  return (
+    <Box
+      sx={{
+        width: '100vw',
+        height: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center', // Center content vertically
+        alignItems: 'center',
+        padding: 0, // Remove padding to align content to the top
+        position: 'relative',
+        bgcolor: darkMode ? '#0D1116' : '#46F1D5', // Toggle background color
+        color: darkMode ? '#FDFFFF' : '#0D1116', // Toggle text color
+      }}
+    >
+      {/* Light/Dark Mode Toggle */}
+      <Box sx={{ position: 'absolute', top: 16, right: 150 }}> {/* Moved left by adjusting right to 100px */}
+        <Stack direction="row" alignItems="center" spacing={1}>
+          <Typography sx={{ color: darkMode ? '#FDFFFF' : '#0D1116' }}>Light</Typography>
+          <Switch
+            checked={darkMode}
+            onChange={toggleDarkMode}
+            color="default"
+            sx={{
+              '& .MuiSwitch-switchBase.Mui-checked': {
+                color: '#FFEB00', // Ball color when checked
+              },
+              '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
+                backgroundColor: '#FFEB00', // Track color when checked
+              },
+              '& .MuiSwitch-track': {
+                backgroundColor: '#0D1116', // Track color when unchecked
+              },
+            }}
+          />
+          <Typography sx={{ color: darkMode ? '#FDFFFF' : '#0D1116' }}>Dark</Typography>
+        </Stack>
+      </Box>
+
+      {/* Left Border */}
+      <Box
+        sx={{
+          position: 'fixed',
+          left: 0,
+          top: 0,
+          bottom: 0,
+          width: '80px', // Adjust the width of the border as needed
+          backgroundColor: darkMode ? '#0D1116' : '#46F1D5', // Toggle border color
+        }}
+      />
+
+      {/* Right Border */}
+      <Box
+        sx={{
+          position: 'fixed',
+          right: 0,
+          top: 0,
+          bottom: 0,
+          width: '80px', // Adjust the width of the border as needed
+          backgroundColor: darkMode ? '#0D1116' : '#46F1D5', // Toggle border color
+        }}
+      />
+
+      {/* Logo Image */}
+      <div style={{ margin: 0, padding: 0, marginTop: '-215px' }}>
+        <Image 
+          src="/ProfBuzzLogo.png"  // Path relative to the public folder
+          alt="ProfBuzz Logo" 
+          width={400} 
+          height={250} 
+          style={{ marginBottom: '20px' }} 
+        />
+      </div>
+
+      <Box
+        sx={{
+          padding: '20px',  
+          minWidth: '300px',
+          fontWeight: '400',         // Set font weight (normal)
+          fontSize: '48px',
+          fontFamily: 'Roboto',
+          color: darkMode ? '#46F1D5' : '#FDFFF',  // Toggle text color
+          backgroundColor: darkMode ? '#0D1116' : '#46F1D5', // Toggle box background color
+          borderRadius: '8px',     // Rounded corners for the box 
+          textAlign: 'center',     // Center text alignment inside the box
+          maxWidth: '80%',         // Limit the width of the box
+          margin: '0 auto',        // Center the box horizontally
+          mt: 4,                   // Add some margin to the top (margin-top)
+        }}
+      >
+        Want to know your professor? Ask me.
+      </Box>      
+      <Typography 
+        variant="h6" 
+        component="p"
+        sx={{
+          color: darkMode ? '#46F1D5' : '#0D1116',  // Toggle text color
+          textAlign: 'center',       // Center text alignment
+          fontFamily: 'Roboto',      // Change font family
+          fontWeight: '400',         // Set font weight (normal)
+          fontSize: '28px',          // Adjust font size
+          lineHeight: '1.5',         // Adjust line height for better readability
+          letterSpacing: '0.5px',    // Add letter spacing for more style
+        }}
+      >
+        AI helper that tells you what all the Buzz is about before the semester starts.
+      </Typography>
+
+      {/* Button with Border and Colored Background */}
+      <Box sx={{ position: 'absolute', bottom: '20px', left: '50%', transform: 'translateX(-50%)' }}>
+        <Button
+          sx={{
+            backgroundColor: darkMode ? '#46F1D5' : '#0D1116', // Toggle button background color
+            minWidth: '300px',           // Increased min-width
+            padding: '20px 40px',        // Increased padding
+            fontSize: '32px',            // Set the font size here
+            borderRadius: '30px',        // Border radius for more rounded corners
+            fontFamily: 'Roboto',        // Change font family
+            fontWeight: 'bold',          // Change font weight
+            textTransform: 'uppercase',  // Make text uppercase
+            letterSpacing: '1.5px',      // Add letter spacing for more style
+            color: darkMode ? '#0D1116' : '#46F1D5', // Toggle text color
+            '&:hover': {
+              backgroundColor: '#FFEB00', // Change background to yellow on hover
+              borderColor: '#FFEB00',     // Change border color on hover
+              color: '#0D1116',           // Change text color on hover
+            },
+          }}
+          onClick={goToChat}
+        >
+          Get Started
+        </Button>
+      </Box>
+    </Box>
+  );
+}
