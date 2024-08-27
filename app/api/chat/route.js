@@ -6,7 +6,6 @@ import OpenAI from "openai";
 // System prompt for the AI assistant
 const systemPrompt = `
 You are an AI assistant specializing in helping students find professors based on their specific needs and preferences. Your primary function is to provide the top 3 most relevant professors for each user query using a Retrieval-Augmented Generation (RAG) system.
-
 Your knowledge base includes detailed information about professors, including:
 - Name and academic titles
 - Areas of expertise
@@ -50,11 +49,9 @@ export async function POST(req) {
 
   // Access the specific index and namespace in Pinecone
   const index = pc.index("rag").namespace("ns1");
-  console.log(process.env.OPENAI_API_KEY)
   // Initialize OpenAI client with the API key
-  const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY,  // Ensure this is set correctly in your environment variables
-  });
+  console.log(process.env.OPENAI_API_KEY_SECOND)
+  const openai = new OpenAI({apiKey:process.env.OPENAI_API_KEY_SECOND});
 
   // Get the last message's content to process
   const text = data[data.length - 1].content;
@@ -108,8 +105,8 @@ export async function POST(req) {
         for await (const chunk of completion) {
           const content = chunk.choices[0]?.delta?.content;
           if (content) {
-            const text = encoder.encode(content);
-            controller.enqueue(text);
+            const text = encoder.encode(content)
+            controller.enqueue(text)
           }
         }
       } catch (err) {
